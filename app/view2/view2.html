@@ -1,0 +1,45 @@
+<div class="container">
+	<span class='right_sidebar-title'>Tournament info</span>
+	<table class='table table-bordered tournament_info'>
+		<tbody>
+			<tr>
+				<td>Tournament</td>
+				<td>{{activeTournament.name}}</td>
+			</tr>
+			<tr>
+				<td>ID</td>
+				<td>{{activeTournament.id}}</td>
+			</tr>
+			<tr>
+				<td>Gameweek</td>
+				<td>{{activeMatchCollection.gameweeks.join(", ")}}</td>
+			</tr>
+			<tr>
+				<td>Starts At</td>
+				<td>{{activeMatchCollection.startTime | date:'d MMM y HH:mm'}}</td>
+			</tr>
+			<tr>
+				<td>Ends At</td>
+				<td>{{activeMatchCollection.endTime  | date:'d MMM y HH:mm'}}</td>
+			</tr>
+			<tr>
+				<td>Buy in</td>
+				<td>{{activeTournament.buyIn | currency:'€':0}}</td>
+			</tr>
+			<tr>
+				<td>Prizepool</td>
+				<td>{{activeTournament.prizePoolAmount | currency:'€':0}}</td>
+			</tr>
+			<tr>
+				<td>Rake</td>
+				<td>{{activeTournament.rake | number:0}}</td>
+			</tr>
+			<tr>
+				<td>Entrants</td>
+				<td>{{activeTournament.entrantsCount}}</td>
+			</tr>										
+		</tbody>
+	</table>
+
+	<a href="#!/view1" class='button_back'>Back</a>
+</div>	

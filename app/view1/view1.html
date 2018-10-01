@@ -1,0 +1,93 @@
+<main>
+	<aside class="left_sidebar">
+		<span class='left_sidebar-title'>Football Leagues</span>
+		<ul>
+			<li>All Leagues 
+				<span ng-class="{'tournaments_length': tournaments.length > 0}">{{tournaments.length}}</span>
+			</li>
+			<li class='hidden-xs' ng-repeat='league in leagues'>{{league.name}}</li>
+		</ul>
+	</aside>
+	<section class="tournaments">
+		<div class="tournaments_filter">
+			<span>Show</span>
+			<select class="form-control" ng-model="tournamentsSortOrder" ng-change="onChanged()">
+				<option value="all">All</option>
+				<option value="waiting">Waiting</option>
+				<option value="in_progress">In Progress</option>
+				<option value="cancelled">Cancelled</option>
+			</select>
+			<span>tournaments</span>
+		</div>
+
+		<table class='table table-responsive'>
+		  <thead>
+		    <tr>
+		      <th>Name</th>
+		      <th>Buy-in</th>
+		      <th>Prize</th>
+		      <th>Matches</th>
+		      <th>Teams</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr class='table_row' ng-repeat="tournament in tournaments | filter:tournamentsSortOrder" ng-click="setActive(tournament)" 
+          ng-class="{'selected':isActive(tournament)}">
+		      <td>{{tournament.name}}</td>
+		      <td>{{tournament.buyIn | currency:'€':0}}</td>
+		      <td class='green tournament_prize'>{{tournament.prizePoolAmount | currency:'€':0}}</td>
+		      <td class='hidden-xs'>{{matchCollections[$index].matchCount}}</td>
+		      <td>{{tournament.fantasyTeamsCount}}</td>
+		      <td>
+				<a href="#!/view2/{{tournament.id}}" class='about_tournament'>View</a>
+		      	{{tournament.status}}
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>		
+	</section>
+	<aside class="right_sidebar hidden-xs">
+		<span class='right_sidebar-title'>Tournament info</span>
+		<table class='table'>
+			<tbody>
+				<tr>
+					<td>Tournament</td>
+					<td>{{activeTournament.name}}</td>
+				</tr>
+				<tr>
+					<td>ID</td>
+					<td>{{activeTournament.id}}</td>
+				</tr>
+				<tr>
+					<td>Gameweek</td>
+					<td>{{activeMatchCollection.gameweeks.join(", ")}}</td>
+				</tr>
+				<tr>
+					<td>Starts At</td>
+					<td>{{activeMatchCollection.startTime | date:'d MMM y HH:mm'}}</td>
+				</tr>
+				<tr>
+					<td>Ends At</td>
+					<td>{{activeMatchCollection.endTime  | date:'d MMM y HH:mm'}}</td>
+				</tr>
+				<tr>
+					<td>Buy in</td>
+					<td>{{activeTournament.buyIn | currency:'€':0}}</td>
+				</tr>
+				<tr>
+					<td>Prizepool</td>
+					<td>{{activeTournament.prizePoolAmount | currency:'€':0}}</td>
+				</tr>
+				<tr>
+					<td>Rake</td>
+					<td>{{activeTournament.rake | number:0}}</td>
+				</tr>
+				<tr>
+					<td>Entrants</td>
+					<td>{{activeTournament.entrantsCount}}</td>
+				</tr>										
+			</tbody>
+		</table>		
+	</aside>
+</main>
